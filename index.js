@@ -39,6 +39,39 @@
         });
     });
 
+    let elements = document.querySelectorAll('.say-hi');
+    Array.prototype.map.call(elements, function(element) {
+        element.addEventListener('mouseenter', function(e) {
+            if(!e.target._said) {
+                // console.log(element.offsetLeft);
+                // console.log(element.offsetTop);
+                // console.log(element.offsetWidth);
+                // console.log(element.offsetHeight);
+                let container = $('#header');
+                let originX = element.offsetLeft + element.offsetWidth / 2;
+                let originY = element.offsetTop + element.offsetHeight / 2;
+                e.target._said = true;
+                let sampled_angles = [];
+                console.log(Math.PI*2/8);
+                ['Hello', '你好', 'こんにちは', '안녕하세요'].forEach(function(text) {
+                    let radius = Math.random() * 150 + 100;
+                    let angle;
+                    do {
+                        angle = Math.random() * Math.PI*2;
+                    } while(
+                        between(angle, Math.PI/4, Math.PI/4*3) || 
+                        sampled_angles.some((angle_) => { return angleDelta(angle, angle_) < Math.PI*2/8; })
+                    )
+                    sampled_angles.push(angle);
+                    let dx = Math.cos(angle) * radius;
+                    let dy = Math.sin(angle) * radius;
+                    flyingText(text, container, originX, originY, originX+dx, originY+dy);
+                });
+                console.log(sampled_angles);
+            }
+        });
+    });
+
     let icons = document.querySelectorAll('.sensitive-icon');
     Array.prototype.map.call(icons, function(icon) {
         icon = wrapItself(icon);
@@ -81,6 +114,7 @@ function verticalBounce(element1, element2, element) {
     element1.style = "display: inline-block;";
     element2.style = "display: inline-block;";
     element._playing = true;
+    element._said = false;
     dynamics.animate(element1, {
         scaleY: 0.8
     }, {
@@ -111,7 +145,10 @@ function verticalBounce(element1, element2, element) {
         bounciness: 600, 
         duration: 800, 
         delay: 500, 
-        complete: function() { element._playing = false; }
+        complete: function() {
+            element._playing = false;
+            element._said = false;
+        }
     });
 }
 
@@ -126,4 +163,44 @@ function inExpand(element) {
         frequency: 150, 
         complete: function() { element._playing = false; }
     });
+}
+
+function flyingText(text, container, fromX, fromY, toX, toY) {
+    let sentence = $('<span>')
+                   .css('position', 'absolute')
+                   .css('visibility', 'hidden')
+                   .appendTo(container);
+    let innerWrap = $('<span>').appendTo(sentence);
+    let innerText = $('<span>').text(text).appendTo(innerWrap);
+    sentence.css('top', fromY - sentence.height() / 2)
+            .css('left', fromX - sentence.width() / 2)
+            .css('visibility', 'visible');
+    dynamics.animate(sentence[0], {
+        translateX: toX - fromX, 
+        translateY: toY - fromY
+    }, {
+        type: dynamics.easeOut, 
+        friction: 300, 
+        duration: 1500, 
+        delay: 0
+    });
+    dynamics.animate(innerWrap[0], {
+        opacity: 0
+    }, {
+        type: dynamics.easeOut, 
+        friction: 50, 
+        duration: 1300, 
+        delay: 700, 
+        complete: function() {
+            sentence.remove();
+        }
+    });
+}
+
+function between(x, a, b) {
+    return x > a && x < b;
+}
+
+function angleDelta(a, b) {
+    return Math.min((2*Math.PI) - Math.abs(a - b), Math.abs(a - b));
 }
