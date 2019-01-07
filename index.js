@@ -54,12 +54,12 @@
                 let sampled_angles = [];
                 console.log(Math.PI*2/8);
                 ['Hello', '你好', 'こんにちは', '안녕하세요'].forEach(function(text) {
-                    let radius = Math.random() * 150 + 100;
+                    let radius = Math.random() * 100 + 130;
                     let angle;
                     do {
                         angle = Math.random() * Math.PI*2;
                     } while(
-                        between(angle, Math.PI/4, Math.PI/4*3) || 
+                        between(angle, Math.PI/4-Math.PI/20, Math.PI/4*3+Math.PI/20) || 
                         sampled_angles.some((angle_) => { return angleDelta(angle, angle_) < Math.PI*2/8; })
                     )
                     sampled_angles.push(angle);
@@ -169,6 +169,7 @@ function flyingText(text, container, fromX, fromY, toX, toY) {
     let sentence = $('<span>')
                    .css('position', 'absolute')
                    .css('visibility', 'hidden')
+                   .css('z-index', '-1')
                    .appendTo(container);
     let innerWrap = $('<span>').appendTo(sentence);
     let innerText = $('<span>').text(text).appendTo(innerWrap);
@@ -181,7 +182,7 @@ function flyingText(text, container, fromX, fromY, toX, toY) {
     }, {
         type: dynamics.easeOut, 
         friction: 300, 
-        duration: 1500, 
+        duration: 2000, 
         delay: 0
     });
     dynamics.animate(innerWrap[0], {
@@ -189,8 +190,8 @@ function flyingText(text, container, fromX, fromY, toX, toY) {
     }, {
         type: dynamics.easeOut, 
         friction: 50, 
-        duration: 1300, 
-        delay: 700, 
+        duration: 500, 
+        delay: 1500, 
         complete: function() {
             sentence.remove();
         }
