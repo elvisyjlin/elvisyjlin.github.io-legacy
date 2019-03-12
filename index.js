@@ -13,7 +13,7 @@
         text = wrapContent(text);
         text._playing = false;
         text._force = false;
-        text.addEventListener('mouseenter', function(e) {
+        addEventListeners(text, ['mouseenter', 'click'], function(e) {
             if(e.target._force || !e.target._playing) horizontalBounce(text);
         });
     });
@@ -23,7 +23,7 @@
         text = wrapContent(text);
         text._playing = false;
         text._force = false;
-        text.addEventListener('mouseenter', function(e) {
+        addEventListeners(text, ['mouseenter', 'click'], function(e) {
             if(e.target._force || !e.target._playing) verticalBounce(text);
         });
     });
@@ -34,19 +34,15 @@
         let image2 = wrapItself(image1);
         image._playing = false;
         image._force = false;
-        image.addEventListener('mouseenter', function(e) {
+        addEventListeners(image, ['mouseenter', 'click'], function(e) {
             if(e.target._force || !e.target._playing) verticalBounce(image1, image2, image);
         });
     });
 
     let elements = document.querySelectorAll('.say-hi');
     Array.prototype.map.call(elements, function(element) {
-        element.addEventListener('mouseenter', function(e) {
+        addEventListeners(element, ['mouseenter', 'click'], function(e) {
             if(!e.target._said) {
-                // console.log(element.offsetLeft);
-                // console.log(element.offsetTop);
-                // console.log(element.offsetWidth);
-                // console.log(element.offsetHeight);
                 let container = $('#header');
                 let originX = element.offsetLeft + element.offsetWidth / 2;
                 let originY = element.offsetTop + element.offsetHeight / 2;
@@ -204,4 +200,8 @@ function between(x, a, b) {
 
 function angleDelta(a, b) {
     return Math.min((2*Math.PI) - Math.abs(a - b), Math.abs(a - b));
+}
+
+function addEventListeners(element, events, handler) {
+    events.forEach( event => element.addEventListener(event, handler, false) );
 }
