@@ -64,6 +64,11 @@ h6 { font-size: .75em; }
     justify-content: space-around;
 }
 
+/*Smaller font size*/
+.smaller {
+    font-size: 80%;
+}
+
 /*No underline*/
 a, 
 a:hover, 
