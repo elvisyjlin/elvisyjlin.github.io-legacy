@@ -48,7 +48,7 @@
                 let originY = element.offsetTop + element.offsetHeight / 2;
                 e.target._said = true;
                 let sampled_angles = [];
-                console.log(Math.PI*2/8);
+                // console.log(Math.PI*2/8);
                 ['Hello', '你好', 'こんにちは', '안녕하세요'].forEach(function(text) {
                     let radius = Math.random() * 100 + 130;
                     let angle;
@@ -63,7 +63,7 @@
                     let dy = Math.sin(angle) * radius;
                     flyingText(text, container, originX, originY, originX+dx, originY+dy);
                 });
-                console.log(sampled_angles);
+                // console.log(sampled_angles);
             }
         });
     });

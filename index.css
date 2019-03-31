@@ -83,3 +83,23 @@ body {
     font-family: "Source Sans Pro";
     font-size: 1em;
 }
+
+/*fullPage.js tooltip texts*/
+#fp-nav ul li .fp-tooltip {
+    color: #007bff !important;
+}
+
+/*fullPage.js tooltips*/
+#fp-nav ul li a span, #fp-nav ul li a.active span {
+    background: #007bff !important;
+}
+
+/*Typed.js text size*/
+#typed {
+    font-size: 2em;
+}
+
+/*Typed.js cursor size*/
+.typed-cursor {
+    font-size: 2em;
+}

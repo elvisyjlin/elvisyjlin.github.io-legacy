@@ -20,9 +20,6 @@
     <!-- Boostrap CSS locally -->
     <link rel="stylesheet" href="vendor/bootstrap-4.0.0-dist/css/bootstrap.min.css">
 
-    <!-- My CSS -->
-    <link rel="stylesheet" type="text/css" href="./index.css">
-
     <!-- Font Awesome JS from CDN -->
     <!-- <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script> -->
     <!-- Font Awesome JS locally -->
@@ -30,10 +27,19 @@
     <!-- Font Awesome CSS locally -->
     <link rel="stylesheet" type="text/css" href="vendor/fontawesome-free-5.0.8/web-fonts-with-css/css/fontawesome-all.min.css">
 
+    <!-- fullPage.js CSS locally -->
+    <link rel="stylesheet" type="text/css" href="vendor/fullPage.js/dist/fullpage.css" />
+
+    <!-- My CSS -->
+    <link rel="stylesheet" type="text/css" href="./index.css">
+
     <!-- Title -->
     <title>Elvis Yu-Jing Lin</title>
 </head>
-<body class="unselectable page-vertical-center">
+<!-- <body class="unselectable page-vertical-center"> -->
+<body>
+<div id="fullpage">
+<div class="section">
     <!-- Clip path group -->
     <svg id="clip-paths" width="0" height="0" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g></g></svg>
 
@@ -131,6 +137,20 @@
             </div>
         </div>
     </div>
+</div>
+<div class="section">
+    <div class="container">
+        <div id="typed-strings">
+            <p>Hello, I'm <strong>Elvis Lin</strong>.</p>
+            <p>I'm pursuing a Master Degree of Computer Science in National Taiwan Universiry.</p>
+            <p>My research topic involves <em>computer vision</em> and <em>natural language processing</em>.</p>
+            <p>I love code, and I love to code.</p>
+            <p>If you’d like to know more about me, please check out my <a href="https://github.com/elvisyjlin" target="_blank">Github</a>.</p>
+        </div>
+        <span id="typed"></span>
+    </div>
+</div>
+</div>
 
     <!-- jQuery, Popper.js, Bootstrap JS from CDN -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -145,8 +165,53 @@
     <!-- TinyColor locally -->
     <script src="vendor/tinycolor-1.4.1/tinycolor-min.js"></script>
 
+    <!-- fullPage.js JS locally -->
+    <script src="vendor/fullPage.js/vendors/easings.min.js"></script>
+    <script type="text/javascript" src="vendor/fullPage.js/vendors/scrolloverflow.min.js"></script>
+    <script type="text/javascript" src="vendor/fullPage.js/dist/fullpage.js"></script>
+
+    <!-- Typed.js -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.9"></script>
+
     <!-- My JS -->
     <script src="index.js"></script>
     <script src="mv.js"></script>
+    <script type="text/javascript">
+$(document).ready(function() {
+    let typed = null;
+    $('#fullpage').fullpage({
+        // Navigation
+        anchors: ['profile', 'greeting'],
+        navigation: true,
+        navigationTooltips: ['Profile', 'Greeting'],
+        // Scrolling
+        autoScrolling: true,
+        scrollHorizontally: false,
+        // Accessibility
+        keyboardScrolling: true,
+        // Design
+        controlArrows: true,
+        sectionsColor : ['#fff', '#fff'],
+        // Events
+        onLeave: function(origin, destination, direction) {
+            if(destination.anchor == 'greeting') {
+                if(typed && typed.constructor === Typed) {
+                    typed.destroy();
+                }
+                typed = new Typed('#typed', {
+                    stringsElement: '#typed-strings',
+                    typeSpeed: 40,
+                    startDelay: 100,
+                    backSpeed: 20,
+                    smartBackspace: true
+                });
+            }
+        }
+    });
+
+    // Methods
+    // $.fn.fullpage.setAllowScrolling(false);
+});
+    </script>
 </body>
 </html>
