@@ -77,6 +77,46 @@
             if(e.target._force || !e.target._playing) inExpand(icon);
         });
     });
+    
+    // Show all sections once loaded.
+    $('#fullpage .section').css('display', 'block');
+    $('body').removeClass('unselectable').removeClass('page-vertical-center');
+    
+    let typed = null;
+    
+    $('#fullpage').fullpage({
+        // Navigation
+        anchors: ['profile', 'greeting'],
+        navigation: true,
+        navigationTooltips: ['Profile', 'Greeting'],
+        // Scrolling
+        autoScrolling: true,
+        scrollHorizontally: false,
+        scrollOverflow: true,
+        // Accessibility
+        keyboardScrolling: true,
+        // Design
+        controlArrows: true,
+        sectionsColor : ['#fff', '#fff'],
+        // Events
+        onLeave: function(origin, destination, direction) {
+            if(destination.anchor == 'greeting') {
+                if(typed && typed.constructor === Typed) {
+                    typed.destroy();
+                }
+                typed = new Typed('#typed', {
+                    stringsElement: '#typed-strings',
+                    typeSpeed: 40,
+                    startDelay: 100,
+                    backSpeed: 20,
+                    smartBackspace: true
+                });
+            }
+        }
+    });
+
+    // Methods
+    // $.fn.fullpage.setAllowScrolling(false);
 })();
 
 function wrapItself(element, tag='span') {

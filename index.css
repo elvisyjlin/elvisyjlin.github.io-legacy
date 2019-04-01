@@ -87,11 +87,13 @@ body {
 /*fullPage.js tooltip texts*/
 #fp-nav ul li .fp-tooltip {
     color: #007bff !important;
+    opacity: 0.8 !important;
 }
 
 /*fullPage.js tooltips*/
 #fp-nav ul li a span, #fp-nav ul li a.active span {
     background: #007bff !important;
+    opacity: 0.8 !important;
 }
 
 /*Typed.js text size*/
@@ -102,4 +104,14 @@ body {
 /*Typed.js cursor size*/
 .typed-cursor {
     font-size: 2em;
+}
+
+/*Hide all sections*/
+#fullpage .section {
+    display: none;
+}
+
+/*Only show the first section*/
+#fullpage .section:first-child {
+    display: block;
 }
