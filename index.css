@@ -105,3 +105,13 @@ body {
 .typed-cursor {
     font-size: 2em;
 }
+
+/*Hide all sections*/
+#fullpage .section {
+    display: none;
+}
+
+/*Only show the first section*/
+#fullpage .section:first-child {
+    display: block;
+}
