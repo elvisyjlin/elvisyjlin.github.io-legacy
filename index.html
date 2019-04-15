@@ -166,7 +166,7 @@
     <script src="vendor/tinycolor-1.4.1/tinycolor-min.js"></script>
 
     <!-- fullPage.js JS locally -->
-    <script src="vendor/fullPage.js/vendors/easings.min.js"></script>
+    <!-- <script src="vendor/fullPage.js/vendors/easings.min.js"></script> -->
     <script type="text/javascript" src="vendor/fullPage.js/vendors/scrolloverflow.min.js"></script>
     <script type="text/javascript" src="vendor/fullPage.js/dist/fullpage.js"></script>
 
@@ -186,7 +186,9 @@ $(document).ready(function() {
         navigationTooltips: ['Profile', 'Greeting'],
         // Scrolling
         autoScrolling: true,
+        continuousVertical: true,
         scrollHorizontally: false,
+        scrollOverflow: true,
         // Accessibility
         keyboardScrolling: true,
         // Design
