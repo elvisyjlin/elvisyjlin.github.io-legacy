@@ -157,11 +157,10 @@
 <div class="section">
     <div class="container">
         <div id="typed-strings">
-            <p>Hello, I'm <strong>Elvis Lin</strong>. An applied AI engineer in Microsoft.</p>
-            <p>I'm mainly working on the natural language processing area, especially extracting meaningful information from documents.</p>
-            <p>During the graduate school, my research topic involved <em>computer vision</em>, <em>natural language processing</em> and blockchain.</p>
-            <p>I love code, and I love to code.</p>
-            <p>If you’d like to know more about me, please check out my <a href="https://github.com/elvisyjlin" target="_blank">Github</a>!</p>
+            <p>Hello, I'm <strong>Elvis Lin</strong>.^1000<br/>An applied AI engineer in Microsoft.</p>
+            <p>I'm mainly working on the natural language processing area,<br/>especially extracting meaningful information from documents.</p>
+            <p>During the graduate school, my research topic involved<br/><em>computer vision</em>, <em>natural language processing</em> and <em>blockchain</em>.</p>
+            <p>I love code, and I love to code.^1000<br/>If you’d like to know more about me, please check out my <a href="https://github.com/elvisyjlin" target="_blank">Github</a>!</p>
         </div>
         <span id="typed"></span>
     </div>
@@ -218,9 +217,9 @@ $(document).ready(function() {
                 typed = new Typed('#typed', {
                     stringsElement: '#typed-strings',
                     typeSpeed: 40,
+                    backDelay: 2000,
                     startDelay: 100,
-                    backSpeed: 20,
-                    smartBackspace: true
+                    fadeOut: true
                 });
             }
         }
